@@ -9,13 +9,14 @@ public class InputController : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     [SerializeField]
     private Slider powerSlider;
     [SerializeField]
-    private float scalefactor = 10f;
+    private float scaleFactor = 10f;
     [SerializeField]
     private float slideDuration = 2f;
 
     private bool isSliding = false;
     private Vector3 previousPoint;
-    private GameObject ball;
+    private BallController ball;
+    private bool hasBall = true;
 
     private void Awake()
     {
@@ -23,14 +24,15 @@ public class InputController : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             Debug.LogWarning("Power Slider not setted in Input Controller");
         }
-        ball = GameObject.FindGameObjectWithTag("Ball");
+
+        ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallController>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         isSliding = true;
         RectTransformUtility.ScreenPointToWorldPointInRectangle(
-            (RectTransform)transform,
+            (RectTransform) transform,
             eventData.position,
             Camera.main,
             out previousPoint);
@@ -51,12 +53,12 @@ public class InputController : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             Vector3 tmp;
 
             RectTransformUtility.ScreenPointToWorldPointInRectangle(
-                (RectTransform)transform,
+                (RectTransform) transform,
                 eventData.position,
                 Camera.main,
                 out tmp);
 
-            powerSlider.value += Vector3.Distance(previousPoint,tmp) / scalefactor;
+            powerSlider.value += Vector3.Distance(previousPoint,tmp) / scaleFactor;
             previousPoint = tmp;
         }
     }
@@ -68,6 +70,10 @@ public class InputController : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     private void ThrowBall()
     {
-
+        if(hasBall)
+        {
+            ball.ThrowBall(powerSlider.value);
+            hasBall = false;
+        }
     }
 }
