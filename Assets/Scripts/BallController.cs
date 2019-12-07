@@ -13,18 +13,13 @@ public class BallController : MonoBehaviour
     private Vector3 throwDirection;
     private Vector3 localStartPosition;
 
+    public Vector3 TargetPosition => target.position;
+
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Target").transform;
-        CalculateThrowDirection();
         localStartPosition = transform.localPosition;
-    }
-
-    private void CalculateThrowDirection()
-    {
-        throwDirection = Vector3.ProjectOnPlane(target.position - transform.position, Vector3.up);
-        throwDirection.Normalize();
     }
 
     public void ResetPosition()
@@ -32,6 +27,12 @@ public class BallController : MonoBehaviour
         transform.localPosition = localStartPosition;
         myRigidbody.constraints = RigidbodyConstraints.FreezePosition;
         CalculateThrowDirection();
+    }
+
+    private void CalculateThrowDirection()
+    {
+        throwDirection = Vector3.ProjectOnPlane(target.position - transform.position, Vector3.up);
+        throwDirection.Normalize();
     }
 
     public void ThrowBall(float power)

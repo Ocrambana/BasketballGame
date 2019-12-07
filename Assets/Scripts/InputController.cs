@@ -15,8 +15,8 @@ public class InputController : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     private bool isSliding = false;
     private Vector3 previousPoint;
-    private BallController ball;
-    private bool hasBall = true;
+    private GameManager gameManager;
+    private bool canThrow = true;
 
     private void Awake()
     {
@@ -25,18 +25,21 @@ public class InputController : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             Debug.LogWarning("Power Slider not setted in Input Controller");
         }
 
-        ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<BallController>();
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        isSliding = true;
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(
-            (RectTransform) transform,
-            eventData.position,
-            Camera.main,
-            out previousPoint);
-        StartCoroutine(StopSlideCorutine());
+        if(canThrow)
+        {
+            isSliding = true;
+            RectTransformUtility.ScreenPointToWorldPointInRectangle(
+                (RectTransform) transform,
+                eventData.position,
+                Camera.main,
+                out previousPoint);
+            StartCoroutine(StopSlideCorutine());
+        }
     }
 
     public IEnumerator StopSlideCorutine()
@@ -65,15 +68,22 @@ public class InputController : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        isSliding = false;
         ThrowBall();
     }
 
     private void ThrowBall()
     {
-        if(hasBall)
+        if(canThrow)
         {
-            ball.ThrowBall(powerSlider.value);
-            hasBall = false;
+            gameManager.ThrowBall(powerSlider.value);
+            canThrow = false;
         }
+    }
+
+    public void Reset()
+    {
+        powerSlider.value = 0f;
+        canThrow = true;
     }
 }
