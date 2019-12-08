@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     private Player player;
     private List<Vector3> positions;
+    private int score = 0;
+    private ScoreUIController scoreUI;
 
     void Start()
     {
@@ -18,9 +20,11 @@ public class GameManager : MonoBehaviour
 
         player = GetComponentInChildren<Player>();
         Reposition();
+
+        scoreUI = FindObjectOfType<ScoreUIController>();
     }
 
-    public void Reposition()
+    private void Reposition()
     {
         int randomPos = UnityEngine.Random.Range(0, positions.Count);
         player.RepositionPlayerAndBall( positions[randomPos]);
@@ -36,6 +40,18 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(timeForAThrow);
         Reposition();
+        SendMessage("Reset");
     }
 
+    public void AddPerfectScore()
+    {
+        score += 3;
+        scoreUI.UpdateScore(score);
+    }
+
+    public void AddNormalScore()
+    {
+        score += 2;
+        scoreUI.UpdateScore(score);
+    }
 }

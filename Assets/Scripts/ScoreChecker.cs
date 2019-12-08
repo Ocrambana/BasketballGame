@@ -12,6 +12,12 @@ public class ScoreChecker : MonoBehaviour
     private bool    hasTopCollided = false,
                     hasNetCollided = false,
                     hasOtherscollided = false;
+    private GameManager gm;
+
+    private void Start()
+    {
+        gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+    }
 
     public void hasCollided(Positions p)
     {
@@ -35,12 +41,12 @@ public class ScoreChecker : MonoBehaviour
             if(hasOtherscollided)
             {
                 //min
-                Debug.Log("Min Score");
+                gm.AddNormalScore();
             }
             else
             {
                 //perfect score
-                Debug.Log("Perfect Score");
+                gm.AddPerfectScore();
             }
 
             Reset();
