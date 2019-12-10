@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     private UIManager uiManager;
     private BilboardBonus bilboardBonus;
-    private GameStatus gameState = GameStatus.Running;
+    private GameStatus gameState = GameStatus.Stopped;
 
     public GameStatus GameState => gameState;
 
@@ -29,8 +29,6 @@ public class GameManager : MonoBehaviour
         uiManager = GetComponent<UIManager>();
         bilboardBonus = FindObjectOfType<BilboardBonus>();
         bilboardBonus.Deactivate();
-        bilboardBonus.StartBonusCountdown();
-        Reposition();
         uiManager.UpdateScore(score);
     }
 
