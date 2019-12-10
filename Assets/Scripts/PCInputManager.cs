@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 public class PCInputManager : MonoBehaviour
 {
@@ -7,11 +6,6 @@ public class PCInputManager : MonoBehaviour
 
     private void Start()
     {
-        if(EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
-        {
-            this.enabled = false;
-        }
-
         gc = GetComponent<GameControls>();
     }
 

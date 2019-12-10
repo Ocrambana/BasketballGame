@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 public class AndroidInputManager : MonoBehaviour
 {
@@ -7,12 +6,6 @@ public class AndroidInputManager : MonoBehaviour
 
     private void Start()
     {
-        if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.StandaloneWindows ||
-            EditorUserBuildSettings.activeBuildTarget == BuildTarget.StandaloneWindows64)
-        {
-            this.enabled = false;
-        }
-
         gc = GetComponent<GameControls>();
     }
 

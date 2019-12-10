@@ -12,9 +12,9 @@ public class GameManager : MonoBehaviour
     private Player player;
     private List<Vector3> positions;
     private int score = 0;
-    private ScoreUIController scoreUI;
+    private UIManager uiManager;
     private BilboardBonus bilboardBonus;
-    private GameStatus gameState = GameStatus.Stopped;
+    private GameStatus gameState = GameStatus.Running;
 
     public GameStatus GameState => gameState;
 
@@ -26,10 +26,12 @@ public class GameManager : MonoBehaviour
 
         player = GetComponentInChildren<Player>();
 
-        scoreUI = FindObjectOfType<ScoreUIController>();
+        uiManager = GetComponent<UIManager>();
         bilboardBonus = FindObjectOfType<BilboardBonus>();
         bilboardBonus.Deactivate();
+        bilboardBonus.StartBonusCountdown();
         Reposition();
+        uiManager.UpdateScore(score);
     }
 
     private void Reposition()
@@ -54,13 +56,13 @@ public class GameManager : MonoBehaviour
     public void AddPerfectScore()
     {
         score += 3;
-        scoreUI.UpdateScore(score);
+        uiManager.UpdateScore(score);
     }
 
     public void AddNormalScore()
     {
         score += 2;
-        scoreUI.UpdateScore(score);
+        uiManager.UpdateScore(score);
     }
 
     public void AddBilboardBonus()
@@ -68,13 +70,37 @@ public class GameManager : MonoBehaviour
         if(bilboardBonus.enabled)
         {
             score += bilboardBonus.BonusPoints;
-            scoreUI.UpdateScore(score);
+            bilboardBonus.BonusTaken();
+            uiManager.UpdateScore(score);
         }
     }
 
     public void FinishThrow()
     {
         StopAllCoroutines();
+        if(gameState == GameStatus.Running)
+        {
+            Reposition();
+            SendMessage("Reset");
+        }
+        else
+        {
+            uiManager.ShowEndGameUI(score);
+        }
+    }
+
+    public void EndRound()
+    {
+        gameState = GameStatus.Stopped;
+        bilboardBonus.Deactivate();
+    }
+
+    public void StartRound()
+    {
+        gameState = GameStatus.Running;
+        bilboardBonus.StartBonusCountdown();
+        score = 0;
+        uiManager.UpdateScore(score);
         Reposition();
         SendMessage("Reset");
     }

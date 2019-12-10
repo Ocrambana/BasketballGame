@@ -1505,6 +1505,18 @@ MonoBehaviour:
   gameDuration: 60
   outsideTimer: {fileID: 1680374626}
   timerCounter: {fileID: 782609733}
+--- !u!114 &1536685071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536685064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ac32abab7ee872458e969303aefe8b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1576063418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,13 +1528,14 @@ GameObject:
   - component: {fileID: 1576063419}
   - component: {fileID: 1576063421}
   - component: {fileID: 1576063420}
+  - component: {fileID: 1576063422}
   m_Layer: 5
   m_Name: EndGameUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1576063419
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1578,6 +1591,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576063418}
   m_CullTransparentMesh: 0
+--- !u!114 &1576063422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576063418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0c1d5f3fc5e0764fac3bd15c4f6a799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restartButton: {fileID: 980115361}
+  endGameScoreText: {fileID: 1184137155}
 --- !u!1 &1607986791
 GameObject:
   m_ObjectHideFlags: 0
@@ -2372,11 +2399,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1738532273, guid: bfa95e33a8b301d4195b4933a4b8c286, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.806
+      value: 8.151
       objectReference: {fileID: 0}
     - target: {fileID: 1738532273, guid: bfa95e33a8b301d4195b4933a4b8c286, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.286
+      value: 6.428
       objectReference: {fileID: 0}
     - target: {fileID: 1782861296, guid: bfa95e33a8b301d4195b4933a4b8c286, type: 3}
       propertyPath: position

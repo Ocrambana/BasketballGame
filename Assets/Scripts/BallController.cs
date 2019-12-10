@@ -15,9 +15,13 @@ public class BallController : MonoBehaviour
 
     public Vector3 TargetPosition => target.position;
 
-    private void Start()
+    private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
         target = GameObject.FindGameObjectWithTag("Target").transform;
         localStartPosition = transform.localPosition;
     }

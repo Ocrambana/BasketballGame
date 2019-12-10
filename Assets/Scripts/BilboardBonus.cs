@@ -15,13 +15,17 @@ public class BilboardBonus : MonoBehaviour
 
     public int BonusPoints => bonusPoints;
 
-    void Start()
+    private void Awake()
     {
-        bonusScoreText = GetComponentInChildren<TextMeshProUGUI>();
         canvas = GetComponent<Canvas>();
     }
 
-    private void StartBonusCountdown()
+    void Start()
+    {
+        bonusScoreText = GetComponentInChildren<TextMeshProUGUI>();
+    }
+
+    public void StartBonusCountdown()
     {
         StartCoroutine(CountdownToNextBonus());
     }
@@ -29,9 +33,7 @@ public class BilboardBonus : MonoBehaviour
     public IEnumerator CountdownToNextBonus()
     {
         float sleepTime = Random.Range(3f,8f);
-        Debug.Log("Sleep for " + sleepTime);
         yield return new WaitForSeconds(sleepTime);
-        Debug.Log("Awake");
         BonusActivation();
     }
 
@@ -57,6 +59,12 @@ public class BilboardBonus : MonoBehaviour
         }
     }
 
+    public void BonusTaken()
+    {
+        Deactivate();
+        StartBonusCountdown();
+    }
+
     public IEnumerator BonusDuration()
     {
         yield return new WaitForSeconds(duration);
@@ -68,6 +76,5 @@ public class BilboardBonus : MonoBehaviour
     {
         StopAllCoroutines();
         canvas.enabled = false;
-        StartBonusCountdown();
     }
 }

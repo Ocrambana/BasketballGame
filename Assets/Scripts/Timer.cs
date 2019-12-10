@@ -13,22 +13,27 @@ public class Timer : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI timerCounter;
 
+    private GameManager gm;
+    float actualTimeRemaining;
+
     private void Start()
     {
-        StartCoroutine(GameCountdown());
+        actualTimeRemaining = gameDuration;
+        gm = FindObjectOfType<GameManager>();
     }
 
-    public IEnumerator GameCountdown()
+    private void Update()
     {
-        float remaning = gameDuration;
-
-        while(remaning > 0f)
+        if(actualTimeRemaining > Mathf.Epsilon && gm.GameState == GameManager.GameStatus.Running)
         {
-            yield return new WaitForEndOfFrame();
-            remaning -= Time.deltaTime;
-            timerCounter.text = Mathf.FloorToInt(remaning).ToString();
-            outsideTimer.fillAmount = remaning / gameDuration;
+            timerCounter.text = Mathf.FloorToInt(actualTimeRemaining).ToString();
+            actualTimeRemaining -= Time.deltaTime;
+            outsideTimer.fillAmount = actualTimeRemaining / gameDuration;
         }
-
+        else if(!(actualTimeRemaining > 0f))
+        {
+            gm.EndRound(); 
+            actualTimeRemaining = gameDuration;
+        }
     }
 }
