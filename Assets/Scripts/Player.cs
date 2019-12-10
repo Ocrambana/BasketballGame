@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
         transform.LookAt(toLookAt);
     }
 
-    public void ThrowBall(float power)
+    public void ThrowBall(Vector3 power)
     {
         ball.ThrowBall(power);
     }

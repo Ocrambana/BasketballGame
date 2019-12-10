@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private float timeForAThrow = 4f;
+    public enum GameStatus
+    { Running, Stopped }
+
+    private float timeForAThrow = 10f;
 
     private Player player;
     private List<Vector3> positions;
     private int score = 0;
     private ScoreUIController scoreUI;
+    private BilboardBonus bilboardBonus;
+    private GameStatus gameState = GameStatus.Stopped;
+
+    public GameStatus GameState => gameState;
 
     void Start()
     {
@@ -19,9 +25,11 @@ public class GameManager : MonoBehaviour
         Destroy(pos.gameObject);
 
         player = GetComponentInChildren<Player>();
-        Reposition();
 
         scoreUI = FindObjectOfType<ScoreUIController>();
+        bilboardBonus = FindObjectOfType<BilboardBonus>();
+        bilboardBonus.Deactivate();
+        Reposition();
     }
 
     private void Reposition()
@@ -30,7 +38,7 @@ public class GameManager : MonoBehaviour
         player.RepositionPlayerAndBall( positions[randomPos]);
     }
 
-    public void ThrowBall(float power)
+    public void ThrowBall(Vector3 power)
     {
         player.ThrowBall(power);
         StartCoroutine(CountdownToReset());
@@ -53,5 +61,21 @@ public class GameManager : MonoBehaviour
     {
         score += 2;
         scoreUI.UpdateScore(score);
+    }
+
+    public void AddBilboardBonus()
+    {
+        if(bilboardBonus.enabled)
+        {
+            score += bilboardBonus.BonusPoints;
+            scoreUI.UpdateScore(score);
+        }
+    }
+
+    public void FinishThrow()
+    {
+        StopAllCoroutines();
+        Reposition();
+        SendMessage("Reset");
     }
 }

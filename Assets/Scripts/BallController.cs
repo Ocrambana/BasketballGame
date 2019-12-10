@@ -35,10 +35,17 @@ public class BallController : MonoBehaviour
         throwDirection.Normalize();
     }
 
-    public void ThrowBall(float power)
+    public void ThrowBall(Vector3 power)
     {
         myRigidbody.constraints = RigidbodyConstraints.None;
-        Vector3 force = throwDirection * power * xZMultiplier + Vector3.up * yMultiplier;
+
+        Vector3 force = new Vector3 
+        ( 
+            throwDirection.x * power.x * xZMultiplier, 
+            yMultiplier,
+            throwDirection.z * power.z * xZMultiplier 
+        );
+
         myRigidbody.AddForce(force, ForceMode.Impulse);
     }
 }

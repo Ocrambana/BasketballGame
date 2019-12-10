@@ -13,14 +13,18 @@ public class GameControls : MonoBehaviour
     private bool isSliding = false,
                  canThrow = true;
     private Vector2 lastPoint = Vector2.zero;
+    private Vector2 firstPoint = Vector2.zero;
+    private Vector3 throwPower;
 
     public void StartSlide(Vector3 startInput)
     {
         if (canThrow)
         {
             isSliding = true;
-            lastPoint = Camera.main.ScreenToViewportPoint(startInput);
+            firstPoint = Camera.main.ScreenToViewportPoint(startInput);
+            lastPoint = firstPoint;
             StartCoroutine(CountdownToEndSlide());
+            throwPower = Vector3.zero;
         }
     }
 
@@ -54,7 +58,9 @@ public class GameControls : MonoBehaviour
     {
         if (canThrow)
         {
-            SendMessage("ThrowBall", powerSlider.value);
+            throwPower.x += powerSlider.value; 
+            throwPower.z += powerSlider.value; 
+            SendMessage("ThrowBall", throwPower);
             canThrow = false;
         }
     }

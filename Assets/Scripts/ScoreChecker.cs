@@ -6,12 +6,13 @@ public class ScoreChecker : MonoBehaviour
 {
     public enum Positions
     {
-        Top, Net, Other
+        Top, Net, Other, Bilboard, End
     };
 
     private bool    hasTopCollided = false,
                     hasNetCollided = false,
-                    hasOtherscollided = false;
+                    hasOthersCollided = false,
+                    hasBillboardCollided = false;
     private GameManager gm;
 
     private void Start()
@@ -32,23 +33,37 @@ public class ScoreChecker : MonoBehaviour
 
         if(p == Positions.Other)
         {
-            hasOtherscollided = true;
+            hasOthersCollided = true;
+        }
+
+        if(p == Positions.Bilboard)
+        {
+            hasOthersCollided = true;
+            hasBillboardCollided = true;
         }
 
         if(hasTopCollided && hasNetCollided)
         {
-            //TODO SCORE
-            if(hasOtherscollided)
+            if(hasOthersCollided)
             {
-                //min
                 gm.AddNormalScore();
             }
             else
             {
-                //perfect score
                 gm.AddPerfectScore();
             }
 
+            if(hasBillboardCollided)
+            {
+                gm.AddBilboardBonus();
+            }
+
+            Reset();
+        }
+
+        if(p == Positions.End)
+        {
+            gm.FinishThrow();
             Reset();
         }
     }
@@ -57,6 +72,7 @@ public class ScoreChecker : MonoBehaviour
     {
         hasNetCollided = false;
         hasTopCollided = false;
-        hasOtherscollided = false;
+        hasBillboardCollided = false;
+        hasOthersCollided = false;
     }
 }
