@@ -5,15 +5,19 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private BallController ball;
+    private CameraMovements camMov;
 
     private void Start()
     {
         ball = GetComponentInChildren<BallController>();
+        camMov = GetComponentInChildren<CameraMovements>();
     }
 
     public void RepositionPlayerAndBall(Vector3 newPosition)
     {
-        if(Mathf.Sign(newPosition.x) != Mathf.Sign(transform.position.x))
+        camMov.ResetPosition();
+
+        if (Mathf.Sign(newPosition.x) != Mathf.Sign(transform.position.x))
         {
             FlipCamera();
         }
@@ -27,15 +31,12 @@ public class Player : MonoBehaviour
 
     private void FlipCamera()
     {
-        Vector3 cameraPos = Camera.main.transform.localPosition;
-        Camera.main.transform.localPosition = new Vector3(-cameraPos.x, cameraPos.y, cameraPos.z);
-
-        Quaternion cameraRot = Camera.main.transform.localRotation;
-        Camera.main.transform.localRotation = new Quaternion(cameraRot.x,-cameraRot.y, cameraRot.z, cameraRot.w);
+        camMov.FlipCamera();
     }
 
     public void ThrowBall(Vector3 power)
     {
+        camMov.FollowBall();
         ball.ThrowBall(power);
     }
 }
