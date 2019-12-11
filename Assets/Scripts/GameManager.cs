@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
         gameState = GameStatus.Stopped;
         bilboardBonus.Deactivate();
         SendMessage("DeactivateInput");
+        uiManager.ShowEndGameUI(score);
     }
 
     public void StartRound()

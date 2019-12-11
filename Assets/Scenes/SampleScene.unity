@@ -414,6 +414,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 75.80078
       objectReference: {fileID: 0}
+    - target: {fileID: 3156589566945323463, guid: ed4d18e9266791f41b147e9996f60cc6,
+        type: 3}
+      propertyPath: gameDuration
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed4d18e9266791f41b147e9996f60cc6, type: 3}
 --- !u!224 &1126638932 stripped
@@ -926,7 +931,7 @@ PrefabInstance:
     - target: {fileID: 1328002073420524268, guid: cbf9929092fda3045b4ea93df68d4fce,
         type: 3}
       propertyPath: near clip plane
-      value: 3.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1328002073420524268, guid: cbf9929092fda3045b4ea93df68d4fce,
         type: 3}
@@ -1058,7 +1063,8 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8003868919716441581, guid: cbf9929092fda3045b4ea93df68d4fce, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: cbf9929092fda3045b4ea93df68d4fce, type: 3}
 --- !u!1001 &1672547838806428043
 PrefabInstance:
