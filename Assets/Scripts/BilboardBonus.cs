@@ -45,12 +45,12 @@ public class BilboardBonus : MonoBehaviour
         {
             if (randomValue > 0.8f)  
             {
-                bonusScoreText.text = "+5";
+                bonusScoreText.text = "+ 5";
                 bonusPoints = 5;
             }
             else
             {
-                bonusScoreText.text = "+4";
+                bonusScoreText.text = "+ 4";
                 bonusPoints = 4;
             }
 

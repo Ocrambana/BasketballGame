@@ -252,18 +252,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1328002073717375164}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &782609733 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1502283675, guid: ed4d18e9266791f41b147e9996f60cc6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1126638931}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1024796124
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,21 +627,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1328002073717375164}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1536685065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1536685064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 615e9ad2eb0b75144adb37a95ba506f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameDuration: 60
-  outsideTimer: {fileID: 1680374626}
-  timerCounter: {fileID: 782609733}
 --- !u!114 &1536685071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -738,18 +711,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1680374626 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5430138623016091268, guid: ed4d18e9266791f41b147e9996f60cc6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1126638931}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1698217989
 GameObject:
   m_ObjectHideFlags: 0

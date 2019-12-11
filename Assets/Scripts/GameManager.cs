@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameStatus.Stopped;
         bilboardBonus.Deactivate();
+        SendMessage("DeactivateInput");
     }
 
     public void StartRound()
@@ -101,5 +102,6 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateScore(score);
         Reposition();
         SendMessage("Reset");
+        SendMessage("ActivateInput");
     }
 }

@@ -7,6 +7,7 @@ public class PCInputManager : MonoBehaviour
     private void Start()
     {
         gc = GetComponent<GameControls>();
+        enabled = false;
     }
 
     void Update()
@@ -25,5 +26,15 @@ public class PCInputManager : MonoBehaviour
         {
             gc.EndSlide();
         }
+    }
+
+    public void ActivateInput()
+    {
+        enabled = true;
+    }
+
+    public void DeactivateInput()
+    {
+        enabled = false;
     }
 }
