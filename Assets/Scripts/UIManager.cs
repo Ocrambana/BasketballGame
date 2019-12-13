@@ -12,15 +12,23 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        startUI = FindObjectOfType<StartGameUI>();
-        startUI.startButton.onClick.AddListener(StartGame);
-        startUI.quitButton.onClick.AddListener(QuitApplication);
-
+        InitializeStartUI();
         scoreUI = FindObjectOfType<ScoreUI>();
+        InitializeEndUI();
+    }
 
+    private void InitializeEndUI()
+    {
         endUI = FindObjectOfType<EndGameUI>();
         endUI.restartButton.onClick.AddListener(OnRestartClick);
         endUI.gameObject.SetActive(false);
+    }
+
+    private void InitializeStartUI()
+    {
+        startUI = FindObjectOfType<StartGameUI>();
+        startUI.startButton.onClick.AddListener(StartGame);
+        startUI.quitButton.onClick.AddListener(QuitApplication);
     }
 
     public void StartGame()
@@ -37,6 +45,7 @@ public class UIManager : MonoBehaviour
     public void UpdateScore(int score)
     {
         scoreUI.scoreText.text = score.ToString();
+        endUI.endGameScoreText.text = score.ToString();
     }
 
     public void OnRestartClick()
@@ -45,9 +54,8 @@ public class UIManager : MonoBehaviour
         SendMessage("StartRound");
     }
 
-    public void ShowEndGameUI(int score)
+    public void ShowEndGameUI()
     {
-        endUI.endGameScoreText.text = score.ToString();
         endUI.gameObject.SetActive(true);
     }
 }

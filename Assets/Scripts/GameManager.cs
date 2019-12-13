@@ -8,10 +8,8 @@ public class GameManager : MonoBehaviour
     { Running, Stopped }
 
     private float timeForAThrow = 10f;
-
     private Player player;
     private List<Vector3> positions;
-    private int score = 0;
     private UIManager uiManager;
     private BilboardBonus bilboardBonus;
     private GameStatus gameState = GameStatus.Stopped;
@@ -27,9 +25,6 @@ public class GameManager : MonoBehaviour
         player = GetComponentInChildren<Player>();
 
         uiManager = GetComponent<UIManager>();
-        bilboardBonus = FindObjectOfType<BilboardBonus>();
-        bilboardBonus.Deactivate();
-        uiManager.UpdateScore(score);
     }
 
     private void Reposition()
@@ -51,28 +46,6 @@ public class GameManager : MonoBehaviour
         SendMessage("Reset");
     }
 
-    public void AddPerfectScore()
-    {
-        score += 3;
-        uiManager.UpdateScore(score);
-    }
-
-    public void AddNormalScore()
-    {
-        score += 2;
-        uiManager.UpdateScore(score);
-    }
-
-    public void AddBilboardBonus()
-    {
-        if(bilboardBonus.enabled)
-        {
-            score += bilboardBonus.BonusPoints;
-            bilboardBonus.BonusTaken();
-            uiManager.UpdateScore(score);
-        }
-    }
-
     public void FinishThrow()
     {
         StopAllCoroutines();
@@ -83,24 +56,21 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            uiManager.ShowEndGameUI(score);
+            uiManager.ShowEndGameUI();
         }
     }
 
     public void EndRound()
     {
         gameState = GameStatus.Stopped;
-        bilboardBonus.Deactivate();
         SendMessage("DeactivateInput");
-        uiManager.ShowEndGameUI(score);
+        SendMessage("StopBilboard");
+        uiManager.ShowEndGameUI();
     }
 
     public void StartRound()
     {
         gameState = GameStatus.Running;
-        bilboardBonus.StartBonusCountdown();
-        score = 0;
-        uiManager.UpdateScore(score);
         Reposition();
         SendMessage("Reset");
         SendMessage("ActivateInput");

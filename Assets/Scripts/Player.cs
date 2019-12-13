@@ -15,18 +15,37 @@ public class Player : MonoBehaviour
 
     public void RepositionPlayerAndBall(Vector3 newPosition)
     {
-        camMov.ResetPosition();
+        ResetCameraPosition();
 
-        if (Mathf.Sign(newPosition.x) != Mathf.Sign(transform.position.x))
+        if (HasChangedSide(newPosition))
         {
             FlipCamera();
         }
 
         transform.position = newPosition;
-        ball.ResetPosition();
+        ResetBallPosition();
+        LookAtTarget();
+    }
 
+    private void ResetCameraPosition()
+    {
+        camMov.ResetPosition();
+    }
+
+    private void ResetBallPosition()
+    {
+        ball.ResetPosition();
+    }
+
+    private void LookAtTarget()
+    {
         Vector3 toLookAt = Vector3.ProjectOnPlane(ball.TargetPosition, Vector3.up);
         transform.LookAt(toLookAt);
+    }
+
+    private bool HasChangedSide(Vector3 newPosition)
+    {
+        return Mathf.Sign(newPosition.x) != Mathf.Sign(transform.position.x);
     }
 
     private void FlipCamera()

@@ -13,11 +13,14 @@ public class ScoreChecker : MonoBehaviour
                     hasNetCollided = false,
                     hasOthersCollided = false,
                     hasBillboardCollided = false;
+
     private GameManager gm;
+    private ScoreManager sm;
 
     private void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        sm = GameObject.FindGameObjectWithTag("GameController").GetComponent<ScoreManager>();
     }
 
     public void hasCollided(Positions p)
@@ -46,16 +49,16 @@ public class ScoreChecker : MonoBehaviour
         {
             if(hasOthersCollided)
             {
-                gm.AddNormalScore();
+                sm.AddNormalScore();
             }
             else
             {
-                gm.AddPerfectScore();
+                sm.AddPerfectScore();
             }
 
             if(hasBillboardCollided)
             {
-                gm.AddBilboardBonus();
+                sm.AddBilboardBonus();
             }
 
             Reset();

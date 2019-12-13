@@ -16,13 +16,11 @@ public class PCInputManager : MonoBehaviour
         {
             gc.StartSlide(Input.mousePosition);
         }
-
-        if (Input.GetMouseButton(0))
+        else if (Input.GetMouseButton(0))
         {
             gc.Slide(Input.mousePosition);
         }
-
-        if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(0))
         {
             gc.EndSlide();
         }

@@ -43,20 +43,24 @@ public class BilboardBonus : MonoBehaviour
 
         if (!canvas.enabled)
         {
-            if (randomValue > 0.8f)  
+            if (randomValue > 0.8f)
             {
-                bonusScoreText.text = "+ 5";
-                bonusPoints = 5;
+                SetBilboardBonus(5);
             }
             else
             {
-                bonusScoreText.text = "+ 4";
-                bonusPoints = 4;
+                SetBilboardBonus(4);
             }
 
             canvas.enabled = true;
             StartCoroutine(BonusDuration());
         }
+    }
+
+    private void SetBilboardBonus(int value)
+    {
+        bonusScoreText.text = "+" + value.ToString();
+        bonusPoints = value;
     }
 
     public void BonusTaken()

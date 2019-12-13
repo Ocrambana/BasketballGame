@@ -36,16 +36,13 @@ public class CameraMovements : MonoBehaviour
     public void FlipCamera()
     {
         isFlipped = !isFlipped;
-        Flip();
+        FlippedStartingPosition();
     }
 
-    private void Flip()
+    private void FlippedStartingPosition()
     {
-        Vector3 oldPos = transform.localPosition;
-        transform.localPosition = new Vector3(-oldPos.x, oldPos.y, oldPos.z);
-
-        Quaternion oldRot = transform.localRotation;
-        transform.localRotation = new Quaternion(oldRot.x, -oldRot.y, oldRot.z, oldRot.w);
+        transform.localPosition = new Vector3(-startPosition.x, startPosition.y, startPosition.z);
+        transform.localRotation = new Quaternion(startRotation.x, -startRotation.y, startRotation.z, startRotation.w);
     }
 
     public void FollowBall()
@@ -56,12 +53,20 @@ public class CameraMovements : MonoBehaviour
     public void ResetPosition()
     {
         isFollowing = false;
-        transform.localPosition = startPosition;
-        transform.localRotation = startRotation;
 
         if(isFlipped)
         {
-            Flip();
+            FlippedStartingPosition();
         }
+        else
+        {
+            UnflippedStartingPosition();
+        }
+    }
+
+    private void UnflippedStartingPosition()
+    {
+        transform.localPosition = startPosition;
+        transform.localRotation = startRotation;
     }
 }

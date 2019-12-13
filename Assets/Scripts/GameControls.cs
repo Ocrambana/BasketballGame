@@ -38,7 +38,7 @@ public class GameControls : MonoBehaviour
     {
         if(isSliding)
         {
-            Vector2 tmp = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            Vector2 tmp = Camera.main.ScreenToViewportPoint(input);
             float addSlide = tmp.y - lastPoint.y;
             powerSlider.value += addSlide;
             lastPoint = tmp;

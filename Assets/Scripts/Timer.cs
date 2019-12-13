@@ -24,14 +24,24 @@ public class Timer : MonoBehaviour
     {
         if(actualTimeRemaining > Mathf.Epsilon && gm.GameState == GameManager.GameStatus.Running)
         {
-            timerCounter.text = Mathf.FloorToInt(actualTimeRemaining).ToString();
-            actualTimeRemaining -= Time.deltaTime;
-            outsideTimer.fillAmount = actualTimeRemaining / gameDuration;
+            UpdateTimerFrame();
         }
         else if(!(actualTimeRemaining > 0f))
         {
-            gm.EndRound(); 
-            actualTimeRemaining = gameDuration;
+            EndRound();
         }
+    }
+
+    private void UpdateTimerFrame()
+    {
+        timerCounter.text = Mathf.FloorToInt(actualTimeRemaining).ToString();
+        actualTimeRemaining -= Time.deltaTime;
+        outsideTimer.fillAmount = actualTimeRemaining / gameDuration;
+    }
+
+    private void EndRound()
+    {
+        gm.EndRound();
+        actualTimeRemaining = gameDuration;
     }
 }
