@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     {
         endUI = FindObjectOfType<EndGameUI>();
         endUI.restartButton.onClick.AddListener(OnRestartClick);
+        endUI.quitButton.onClick.AddListener(QuitApplication);
         endUI.gameObject.SetActive(false);
     }
 

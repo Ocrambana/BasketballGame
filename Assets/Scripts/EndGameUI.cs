@@ -4,6 +4,6 @@ using TMPro;
 
 public class EndGameUI : MonoBehaviour
 {
-    public Button restartButton;
+    public Button restartButton, quitButton;
     public TextMeshProUGUI endGameScoreText;
 }
